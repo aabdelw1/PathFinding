@@ -214,7 +214,7 @@ if __name__ == '__main__':
 	
 	# Obtain the locations of the traps
 	allPoints = tz.genPoints()
-	traps = allPoints[0]
+	traps = allPoints[0] # THIS NEEDS TO BE PUBLISHED
 	outerTraps = allPoints[1]
 	
 	# Prepare the window that will display the map
