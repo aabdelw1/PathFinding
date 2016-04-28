@@ -13,6 +13,12 @@ Depending on your python installation, you might need to install yaml as well.
 To use the ROS pacakge, start roscore, and then run publisher.py in python 2.7, passing the file of the obstacle map in as a parameter
 Ex: `python publisher.py my_map.json`
 
+#### Publishing to ROS
+To publish to ROS, simply follow these four steps:
+1. Start the ROS core service from your base directory `roscore`
+2. Start the ROS listener `python trap_listener.py`
+3. Run maintrap `python maintrap.py`
+4. After the TK visual is generated, click the red exit button. The terminal will ask if you want to publish to ROS. `Do you want to publish to ROS [y/n]:`
 
 #### Using this for Trap Placement
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # license removed for brevity
 import rospy
-from geometry_msgs.msg  import Point
+from geometry_msgs.msg import Point
 
-import trapzone
+import maintrap
 
 # Publish location of traps to ROS
 def talker(traps):
     pub = rospy.Publisher('traps', String, queue_size=10)
-    rospy.init_node('trap_talker', anonymous=True)
+    rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     messages = []
     for trap in traps:
@@ -23,8 +23,8 @@ def talker(traps):
             rate.sleep()
 
 if __name__ == '__main__':
-    traps = trapzone.genPoints()
     try:
-        talker(traps)
+        maintrap.createTraps()
+	#talker(traps)
     except rospy.ROSInterruptException:
         pass

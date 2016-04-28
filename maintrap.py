@@ -3,9 +3,26 @@ import t2
 import trapzone
 import shapely
 import math
+import rospy
+from geometry_msgs.msg import Point
 
-if __name__ == '__main__':
-	
+# Publish location of traps to ROS
+def talker(traps):
+    pub = rospy.Publisher('traps', Point, queue_size=10)
+    rospy.init_node('trap_talker', anonymous=True)
+    rate = rospy.Rate(10) # 10hz
+    messages = []
+    for trap in traps:
+	message = Point(trap[0], trap[1], 0)
+    messages.append(message)
+
+    while not rospy.is_shutdown():
+        for msg in messages:
+            rospy.loginfo(msg)
+            pub.publish(msg)
+            rate.sleep()
+
+def createTraps():
 	option = input("(1) Use existing map\n(2) Manually input map\n(3) Use default map (Which is map #3)\nChoose option: ")
 	
 	zone = []
@@ -234,3 +251,11 @@ if __name__ == '__main__':
 	trapzone.drawPoints(canvas,outerTraps,3,'white')
 	
 	root.mainloop()
+	
+	ros_response = raw_input('Do you want to publish to ROS [y/n]: ')
+	if ros_response == "y":
+		talker(traps) # Publishing to ROS
+
+if __name__ == '__main__':
+	createTraps()
+	
