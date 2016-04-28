@@ -3,7 +3,7 @@ import rospy
 from geometry_msgs.msg import Point
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    rospy.loginfo(rospy.get_caller_id() + " I heard %s", data)
 
 def listener():
 
@@ -13,7 +13,7 @@ def listener():
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber("trap_talker", Point, callback)
+    rospy.Subscriber("traps", Point, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
