@@ -126,31 +126,29 @@ if __name__ == '__main__':
 			]
 	
 	if option==2:
-		print("INPUT FLY-ZONE")
-		num = input("How many points?: ")
+		print("DEFINE FLY ZONE")
+		num = input("How many points define the shape the of fly zone?\n(Rectangle = 4, Triangle = 3, etc.): ")
 		for i in range(1,num+1):
 			tuple = input("Point "+str(i)+" (x,y): ")
 			zone = zone + [tuple]
 		
-		new = input("New obstacle? (y/n): ")
+		new = raw_input("New obstacle? (y/n): ")
 		while new=="y":
 			obstacle = []
 			num = input("How many points?: ")
 			for i in range(1,num+1):
 				tuple = input("Point "+str(i)+" (x,y): ")
 				obstacle = obstacle + [tuple]
-			obstacles = obstacles + obstacle
-			new = input("New obstacle? (y/n): ")
+			obstacles = obstacles + [obstacle]
+			new = raw_input("New obstacle? (y/n): ")
 			
 			
 	if option==3:
 		zone = [
-			[
 				(0,0),
 				(150,0),
 				(150,125),
 				(0,125)
-			]
 		]
 		obstacles = [
 			[
@@ -190,12 +188,12 @@ if __name__ == '__main__':
 	obstacles1 = []
 	
 	# Obtain input from the user and create instance of TrapZone
-	radius = input('Enter radius of traps: ')
-	response = raw_input('Would you like to shrink the zone? [y/n]: ')
+	radius = input('Enter trap coverage radius: ')
+	response = raw_input('Would you like to shrink the zone to ensure traps do not get placed to close to no-fly zones? [y/n]: ')
 	zone1 = zone
 	if response == "y":
 		erode = True
-		bufAmt = input('How much buffer?: ')
+		bufAmt = input('What is the minimum distance between a trap and an obstacle or the edge of the fly zone?: ')
 		zone1 = zone.buffer(-1*abs(bufAmt))
 		for obstacle in obstacles:
 			obstacles1 = obstacles1 + [obstacle.buffer(abs(bufAmt))]
